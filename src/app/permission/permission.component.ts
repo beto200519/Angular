@@ -27,7 +27,11 @@ export class PermissionComponent {
     { id: '87550', nombre: 'Norberto carrillo', rol: 'Director', puerta: '1101', dia: 'L,M,M,J,S,D', hora: '12:00 AM - 11:59 PM' }
   ];
 
-  searchText: string = '';
+  searchTerm: string = '';
 
   constructor() {}
+
+  clearSearch() {
+    this.searchTerm = '';
+  }
 }

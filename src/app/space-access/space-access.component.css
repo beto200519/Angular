@@ -1,12 +1,13 @@
 label{
-  padding-left: 2%;
+  padding-left: 6%;
+  margin-top: 1%;
 }
 .jot{
     padding-left: 9%;
     padding-right: 9%;
 }
 .card {
-    border-radius: 10px;
+    border-radius: 15px;
     overflow: hidden;
     padding-left: 0%;
     padding-bottom: 5%;
@@ -17,4 +18,11 @@ label{
     font-weight: bold;
     margin: 1.8%;
     padding: 0.5%;
+  }
+  input{
+    padding: 1%;
+    margin-top: 1%;
+  }
+  select{
+    padding: 1%;
   }
