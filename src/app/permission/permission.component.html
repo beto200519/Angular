@@ -25,7 +25,7 @@
             padding: 1rem 2rem;
         }
         
-        .banner h1 {
+        .banner h2 {
             font-size: 1.5rem;
             font-weight: 600;
         }
@@ -35,15 +35,26 @@
     </div>
   
     <!-- Search Bar -->
-    <div class="search-container">
-      <div class="input-group mb-3 mx-auto search-bar">
-        <span class="input-group-text bg-white">
-          <i class="bi bi-search"></i>
-        </span>
-        <input type="text" class="form-control border-start-0" placeholder="Buscar..." [(ngModel)]="searchText">
-        <span class="input-group-text bg-white">
-          <i class="bi bi-x"></i>
-        </span>
+    <div class="container mt-4 mb-4">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="search-container">
+            <input 
+              type="text" 
+              class="form-control search-input" 
+              placeholder="Buscar"
+              [(ngModel)]="searchTerm">
+            <div class="search-icon">
+              <i class="bi bi-search"></i>
+            </div>
+            <button 
+              *ngIf="searchTerm" 
+              class="clear-button border-0 bg-transparent"
+              (click)="clearSearch()">
+              <i class="bi bi-x"></i>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   
