@@ -1,0 +1,144 @@
+:host {
+    display: block;
+    font-family: Arial, sans-serif;
+}
+
+.top-header {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    border-bottom: 1px solid #e0e0e0;
+}
+  
+.logo-section {
+    display: flex;
+    align-items: center;
+    margin-right: 30px;
+}
+  
+  .logo {
+    width: 60px;
+    height: 50px;
+  }
+  
+  .brand-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #4a4a4a;
+    margin-left: 10px;
+  }
+  
+  .main-nav {
+    display: flex;
+    flex-grow: 1;
+  }
+  
+  .main-nav a {
+    margin-right: 20px;
+    text-decoration: none;
+    color: #4a4a4a;
+    padding: 5px 10px;
+  }
+  
+  .main-nav a.active {
+    color: #3f51b5;
+    border-bottom: 2px solid #3f51b5;
+  }
+  
+  .user-profile {
+    margin-left: auto;
+  }
+  
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+  }
+
+/* History header */
+.historial-header {
+  background-color: #3f51b5;
+  color: white;
+  padding: 15px 25px;
+}
+
+.historial-header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+/* Search bar */
+.search-container {
+  position: relative;
+  width: 100%;
+}
+
+.search-input {
+  padding-left: 40px;
+  padding-right: 40px;
+  border-radius: 20px;
+  height: 45px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.search-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.clear-button {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+/* Table styling */
+.kiko{
+  padding-left: 9%;
+  padding-right: 9%;
+}
+.card {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.table-header {
+  background-color: #3f51b5;
+  color: white;
+}
+
+.table-header th {
+  padding: 1rem;
+  font-weight: 500;
+  background-color: #3f51b5;
+}
+
+.table-row {
+  border-bottom: 1px solid #d7d5d5;
+}
+
+.table-row:last-child {
+  border-bottom: none;
+}
+
+.table-row td {
+  padding: 1rem;
+  vertical-align: middle;
+}
+
+.options-button {
+  color: #6c757d;
+  background: transparent;
+  border: none;
+}
+
+.options-button:hover {
+  color: #4B4B9D;
+  background-color: #f8f9fa;
+}

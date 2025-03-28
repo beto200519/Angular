@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>AutoSecure Navigation</title> 
+</head>
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <svg class="logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="10,50 30,30 50,50 30,70" fill="#383e8e" />
+                <polygon points="50,50 70,30 90,50 70,70" fill="#383e8e" />
+            </svg>
+            <span class="logo-text">AutoSecure</span>
+        </div>
+        <nav class="nav-menu">
+            <a href="/home" class="nav-item">home</a>
+            <a href="/permisos" class="nav-item">Permisos</a>
+            <a href="/gestion-usuario" class="nav-item">Gestión de Usuario</a>
+            <a href="/historial" class="nav-item">Historial</a>
+            <a href="/espacios" class="nav-item">Espacios</a>
+            <a href="/tablero" class="nav-item">dashboard</a>
+        </nav>
+        <div class="user-profile">
+            <img src="https://i.pinimg.com/474x/0e/31/a5/0e31a555561ff35015b3d22a112d943d.jpg" alt="User Profile" />
+            <button class="logout-button" >Cerrar Sesión</button>
+        </div>
+    </header>
+
+    <script>
+        function logout() {
+            // Add your logout logic here
+            alert('Cerrando sesión...');
+        }
+    </script>
+</body>
+</html>

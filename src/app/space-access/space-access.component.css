@@ -1,0 +1,18 @@
+label{
+  padding-left: 2%;
+}
+.jot{
+    padding-left: 9%;
+    padding-right: 9%;
+}
+.card {
+    border-radius: 10px;
+    overflow: hidden;
+    padding-left: 0%;
+    padding-bottom: 5%;
+    padding-top: 2%;
+    padding-right: 2%;
+  }
+  .btn {
+    font-weight: bold;
+  }

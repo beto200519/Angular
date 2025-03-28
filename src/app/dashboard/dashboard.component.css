@@ -1,0 +1,236 @@
+:host {
+    display: block;
+    font-family: Arial, sans-serif;
+  }
+  
+  .dashboard-container {
+    max-width: 100vw;
+    margin: 0 auto;
+    background-color: #ffffff;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .top-header {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .logo-section {
+    display: flex;
+    align-items: center;
+    margin-right: 30px;
+  }
+  
+  .logo {
+    width: 60px;
+    height: 50px;
+  }
+  
+  .brand-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #4a4a4a;
+    margin-left: 10px;
+  }
+  
+  .main-nav {
+    display: flex;
+    flex-grow: 1;
+  }
+  
+  .main-nav a {
+    margin-right: 20px;
+    text-decoration: none;
+    color: #4a4a4a;
+    padding: 5px 10px;
+  }
+  
+  .main-nav a.active {
+    color: #6366f1;
+    border-bottom: 2px solid #6366f1;
+  }
+  
+  .user-profile {
+    margin-left: auto;
+  }
+  
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+  }
+  
+  .dashboard-header {
+    background-color: #3f51b5;
+    color: white;
+    padding: 15px 25px;
+  }
+  
+  .dashboard-header h1 {
+    margin: 0;
+    font-size: 24px;
+  }
+
+  .dashboard-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .metrics-container {
+    display: flex;
+    background-color: #f9f9f9;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .chart-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-right: 20px;
+  }
+  
+  .access-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 10px;
+  }
+  
+  .access-letter {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .bar-chart {
+    flex-grow: 1;
+    position: relative;
+  }
+  
+  .chart-legend {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 15px;
+  }
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+  }
+  
+  .legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    margin-right: 8px;
+  }
+  
+  .cds {
+    background-color: #8e44ad;
+  }
+  
+  .cisco {
+    background-color: #e74c3c;
+  }
+  
+  .microsoft {
+    background-color: #27ae60;
+  }
+  
+  .aula {
+    background-color: #34495e;
+  }
+  
+  .gauge-charts {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .chart-row {
+    display: flex;
+    margin: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .gauge-item {
+    width: 35%;
+    margin: 10px;
+    text-align: center;
+    position: relative;
+  }
+  
+  .user-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+  }
+  
+  .user-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    margin-right: 19px;
+  }
+  
+  .usuarios {
+    background-color: #27ae60;
+  }
+  
+  .administradores {
+    background-color: #f1c40f;
+  }
+  
+  .gauge-chart {
+    position: relative;
+    height: 190px;
+  }
+  
+  .gauge-value {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .gauge-title {
+    font-weight: bold;
+    margin-top: -35px;
+  }
+  
+  .gauge-subtitle {
+    font-size: 12px;
+    color: #777;
+    max-width: 150px;
+    margin: 5px auto;
+  }
+  
+  .filters {
+    display: flex;
+    flex-direction: column; 
+    gap: 210px; 
+    align-items: center;
+    justify-content: flex-start;
+    width: 150px; 
+    margin-left: 1280px; 
+    position: relative;
+    top: -500px; 
+  }
+  
+  .filter-dropdown select {
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    width: 150px;
+  }

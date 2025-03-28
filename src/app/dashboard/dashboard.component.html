@@ -1,0 +1,137 @@
+<app-header></app-header>
+<!-- dashboard.component.html -->
+<div class="dashboard-container">
+    <style>
+      :root {
+            --primary: #383e8e;
+            --primary-dark: #2d3270;
+            --secondary: #f5f5f5;
+            --danger: #e74c3c;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --border: #dcdfe6;
+            --text: #333;
+            --text-light: #666;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+      .banner {
+            background-color: #383e8e;
+            color: white;
+            padding: 1rem 2rem;
+        }
+        
+        .banner h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+    </style>
+    <div class="banner">
+      <h2>Dashboard</h2>
+    </div>
+  
+    <div class="dashboard-content">
+      <div class="metrics-container">
+
+        <div class="chart-section" >
+          <div class="access-label" class="texto-izquierda" >
+            <span class="access-letter">A</span>
+            <span class="access-letter">C</span>
+            <span class="access-letter">C</span>
+            <span class="access-letter">E</span>
+            <span class="access-letter">S</span>
+            <span class="access-letter">O</span>
+            <span class="access-letter">S</span>
+          </div>
+          <div class="bar-chart">
+            <canvas id="accessChart"></canvas>
+          </div>
+          <div class="chart-legend">
+            <div class="legend-item">
+              <div class="legend-color cds"></div>
+              <span>CDS</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color cisco"></div>
+              <span>Cisco</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color microsoft"></div>
+              <span>Microsoft</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color aula"></div>
+              <span>Aula activa</span>
+            </div>
+          </div>
+        </div>
+  
+        <div class="gauge-charts">
+          <div class="chart-row">
+            <div class="gauge-item">
+              <div class="user-indicator">
+                <div class="user-icon usuarios"></div>
+                <span>Usuarios</span>
+              </div>
+              <div class="gauge-chart">
+                <canvas id="cdsGauge"></canvas>
+                <div class="gauge-value">85%</div>
+              </div>
+              <div class="gauge-title">CDS</div>
+              <div class="gauge-subtitle">Porcentaje de accesos en el cuatrimestre</div>
+            </div>
+  
+            <div class="gauge-item">
+              <div class="user-indicator">
+                <div class="user-icon administradores"></div>
+                <span>Administradores</span>
+              </div>
+              <div class="gauge-chart">
+                <canvas id="ciscoGauge"></canvas>
+                <div class="gauge-value">34%</div>
+              </div>
+              <div class="gauge-title">CISCO</div>
+              <div class="gauge-subtitle">Porcentaje de accesos en el cuatrimestre</div>
+            </div>
+          </div>
+  
+          <div class="chart-row">
+            <div class="gauge-item">
+              <div class="gauge-chart">
+                <canvas id="microsoftGauge"></canvas>
+                <div class="gauge-value">69%</div>
+              </div>
+              <div class="gauge-title">MICROSOFT</div>
+              <div class="gauge-subtitle">Porcentaje de accesos en el cuatrimestre</div>
+            </div>
+  
+            <div class="gauge-item">
+              <div class="gauge-chart">
+                <canvas id="aulaGauge"></canvas>
+                <div class="gauge-value">81%</div>
+              </div>
+              <div class="gauge-title">AULA ACTIVA</div>
+              <div class="gauge-subtitle">Porcentaje de accesos en el cuatrimestre</div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="filters">
+        <div class="filter-dropdown">
+          <select>
+            <option>Puertas</option>
+          </select>
+        </div>
+        <div class="filter-dropdown">
+          <select>
+            <option>Rol</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
