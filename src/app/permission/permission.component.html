@@ -43,7 +43,8 @@
               type="text" 
               class="form-control search-input" 
               placeholder="Buscar"
-              [(ngModel)]="searchTerm">
+              [(ngModel)]="searchTerm"
+              (ngModelChange)="filterPermissions()">
             <div class="search-icon">
               <i class="bi bi-search"></i>
             </div>
@@ -69,28 +70,23 @@
                   <th scope="col">Id</th>
                   <th scope="col">Nombre</th>
                   <th scope="col">Rol</th>
-                  <th scope="col">
-                    <div class="dropdown">
-                      <button class="btn btn-light btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                        Puerta
-                      </button>
-                    </div>
-                  </th>
+                  <th scope="col">Puerta</th>
                   <th scope="col">Día</th>
                   <th scope="col">Hora</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let perm of permissions">
+                <tr *ngFor="let perm of filteredPermissions">
                   <td>{{ perm.id }}</td>
-                  <td>{{ perm.nombre }}</td>
-                  <td>{{ perm.rol }}</td>
-                  <td>{{ perm.puerta }}</td>
-                  <td>{{ perm.dia }}</td>
-                  <td>{{ perm.hora }}</td>
+                  <td>{{ perm.usuarioId }}</td>
+                  <td>{{ perm.puesto }}</td>
+                  <td>{{ perm.puertasId }}</td>
+                  <td>{{ perm.dias }}</td>
+                  <td>{{ perm.horas }}</td>
                 </tr>
               </tbody>
             </table>
+              <p *ngIf="filterPermissions.length === 0" class="text-center p-3">No hay permisos disponibles</p>
           </div>
         </div>
       </div>
