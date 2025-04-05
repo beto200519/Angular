@@ -43,7 +43,8 @@
               type="text" 
               class="form-control search-input" 
               placeholder="Buscar"
-              [(ngModel)]="searchTerm">
+              [(ngModel)]="searchTerm"
+              (ngModelChange)="filterPermissions()">
             <div class="search-icon">
               <i class="bi bi-search"></i>
             </div>
