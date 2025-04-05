@@ -1,17 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import { HeaderComponent } from '../header/header.component';
+import { FormsModule } from '@angular/forms';
 
 Chart.register(...registerables);
 
 @Component({
   selector: 'app-dashboard',
-  imports: [HeaderComponent],
+  imports: [HeaderComponent, FormsModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent implements OnInit {
-  constructor() {}
+  selectedDoor: string = '';
+  selectedRole: string = '';
 
   accessChart: any;
   cdsGauge: any;
@@ -19,9 +21,21 @@ export class DashboardComponent implements OnInit {
   microsoftGauge: any;
   aulaGauge: any;
 
+  constructor() {}
+
   ngOnInit(): void {
     this.createAccessChart();
     this.createGaugeCharts();
+  }
+
+  onDoorChange(): void {
+    console.log('Puerta seleccionada:', this.selectedDoor);
+    // Aquí puedes actualizar gráficos o hacer peticiones a una API.
+  }
+
+  onRoleChange(): void {
+    console.log('Rol seleccionado:', this.selectedRole);
+    // Aquí puedes modificar la lógica según el rol seleccionado.
   }
 
   createAccessChart(): void {
@@ -89,7 +103,6 @@ export class DashboardComponent implements OnInit {
   createGaugeChart(elementId: string, value: number, colorStart: string, colorEnd: string): void {
     const ctx = document.getElementById(elementId) as HTMLCanvasElement;
     
-    // Create a gauge chart
     new Chart(ctx, {
       type: 'doughnut',
       data: {

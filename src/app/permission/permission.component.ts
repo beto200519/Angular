@@ -1,37 +1,48 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HeaderComponent } from "../header/header.component";
-
-interface Permission {
-  id: string;
-  nombre: string;
-  rol: string;
-  puerta: string;
-  dia: string;
-  hora: string;
-}
+import { PermissionService } from '../services/permission.service';
+import { HttpClientModule } from '@angular/common/http';
+import { HeaderComponent } from '../header/header.component';
+import { User } from './user.model';
 
 @Component({
   selector: 'app-permission',
-  imports: [CommonModule, FormsModule, HeaderComponent],
+  imports: [CommonModule, FormsModule,  HttpClientModule,  HeaderComponent],
   templateUrl: './permission.component.html',
   styleUrl: './permission.component.css'
+  
 })
 export class PermissionComponent {
-  permissions: Permission[] = [
-    { id: '87546', nombre: 'Nicol Gastelum', rol: 'Intendente', puerta: '1101', dia: 'L,M,M,J,V', hora: '9:00 AM - 8:00 PM' },
-    { id: '87547', nombre: 'Jose Acuña', rol: 'Docente', puerta: '1101', dia: 'L,M,S', hora: '9:00 AM - 8:00 PM' },
-    { id: '87548', nombre: 'René Estrella', rol: 'Docente', puerta: '1101', dia: 'L,J,V', hora: '9:00 AM - 8:00 PM' },
-    { id: '87549', nombre: 'Alexa Gastelum', rol: 'Itendente', puerta: '1101', dia: 'M,M,D', hora: '9:00 AM - 8:00 PM' },
-    { id: '87550', nombre: 'Norberto carrillo', rol: 'Director', puerta: '1101', dia: 'L,M,M,J,S,D', hora: '12:00 AM - 11:59 PM' }
-  ];
+  permissions: any[] = [];
+  searchTerm: string = ''; // Para la búsqueda
+  filteredPermissions: any[] = [];
 
-  searchTerm: string = '';
+  constructor(private permisosService: PermissionService) { }
 
-  constructor() {}
+  ngOnInit(): void {
+    this.permisosService.getPermisos().subscribe(
+      data => {
+        this.permissions = data;  // Asignamos los datos de la API a la propiedad
+        this.filteredPermissions = this.permissions;
+      },
+      error => {
+        console.error('Error fetching permissions:', error);
+      }
+    );
+  }
 
-  clearSearch() {
+  // Método para filtrar permisos según el término de búsqueda
+  filterPermissions(): void {
+    this.filteredPermissions = this.permissions.filter(perm => 
+      perm.usuarioId.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+  }
+
+  // Limpiar la búsqueda
+  clearSearch(): void {
     this.searchTerm = '';
+    this.filterPermissions();
   }
 }
+

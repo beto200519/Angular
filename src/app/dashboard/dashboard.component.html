@@ -123,13 +123,19 @@
   
       <div class="filters">
         <div class="filter-dropdown">
-          <select>
-            <option>Puertas</option>
+          <select [(ngModel)]="selectedDoor" (change)="onDoorChange()">
+            <option value="">Puertas</option>
+            <option value="CDS">CDS</option>
+            <option value="Microsoft">Microsoft</option>
+            <option value="Aula activa">Aula activa</option>
+            <option value="Cisco">Cisco</option>
           </select>
         </div>
         <div class="filter-dropdown">
-          <select>
-            <option>Rol</option>
+          <select [(ngModel)]="selectedRole" (change)="onRoleChange()">
+            <option value="">Rol</option>
+            <option value="Administrador">Administrador</option>
+            <option value="Usuario">Usuario</option>
           </select>
         </div>
       </div>
