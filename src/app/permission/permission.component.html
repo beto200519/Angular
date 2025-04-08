@@ -24,72 +24,81 @@
             color: white;
             padding: 1rem 2rem;
         }
-        
+       
         .banner h2 {
             font-size: 1.5rem;
             font-weight: 600;
         }
      </style>
-    <div class="banner">
-      <h2>Permisos</h2>
-    </div>
-  
-    <!-- Search Bar -->
-    <div class="container mt-4 mb-4">
-      <div class="row justify-content-center">
-        <div class="col-md-6">
-          <div class="search-container">
-            <input 
-              type="text" 
-              class="form-control search-input" 
-              placeholder="Buscar"
-              [(ngModel)]="searchTerm"
-              (ngModelChange)="filterPermissions()">
-            <div class="search-icon">
-              <i class="bi bi-search"></i>
-            </div>
-            <button 
-              *ngIf="searchTerm" 
-              class="clear-button border-0 bg-transparent"
-              (click)="clearSearch()">
-              <i class="bi bi-x"></i>
-            </button>
+<body>
+  <div class="banner">
+    <h2>Permisos</h2>
+  </div>
+
+
+  <div class="content">
+    <!-- Tabs for Navigation -->
+   <div class="tab-container">
+    <button class="btn " (click)="altapermisos()" >Alta de permisos</button>
+    <button class="btn " (click)="listapermisos()">Lista de permisos</button>
+   </div>
+
+
+    <!-- Alta de permisos content -->
+    <div class="card">
+      <form [formGroup]="permisoForm" novalidate>
+        <div class="form-container">
+          <div class="form-group" id="nombreGroup">
+            <label>ID Permiso (solo para actualizar o eliminar)</label>
+            <input type="text" class="form-control"  style="border: 2px solid #cecece;"  placeholder="Escribe el ID del permiso" formControlName="ID"  name="permisoId" >
+          </div>
+ 
+          <div class="form-group">
+            <label>Usuario ID</label>
+            <input type="text" class="form-control" style="border: 2px solid #cecece;"  placeholder="Escribe el nombre del usuario" formControlName="Usuarioid"  name="Usuario_id" required>
+          </div>
+ 
+          <div class="form-group">
+            <label>Puerta ID</label>
+            <input type="text" class="form-control" style="border: 2px solid #cecece;"  placeholder="Escribe el nombre de la puerta" formControlName="Puertasid" name="Puertas_id" required>
+          </div>
+ 
+          <div class="form-group">
+            <label>Puesto</label>
+            <input type="text" class="form-control" style="border: 2px solid #cecece;"  placeholder="Escribe el puesto del usuario" formControlName="Puesto" name="Puesto" required>
+          </div>
+ 
+          <div class="form-group">
+            <label>Días</label>
+            <input type="text" class="form-control" style="border: 2px solid #cecece;"  placeholder="Escribe los dias de permiso" formControlName="Dias" name="Dias" required>
+          </div>
+ 
+          <div class="form-group">
+            <label>Horas</label>
+            <input type="text" class="form-control" style="border: 2px solid #cecece;"  placeholder="Escribe las horas del permiso" formControlName="Horas" name="Horas" required>
           </div>
         </div>
-      </div>
+      </form>
+
+
+      <div class="actions">
+        <button type="submit" id="createButton" class="btn-primary" (click)="registrarPermiso()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            Crear Nuevo
+        </button>
+        <button type="submit" id="saveButton" class="btn-success" (click)="actualizarPermiso()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+            Guardar
+        </button>
+        <button type="submit" id="deleteButton" class="btn-danger" (click)="eliminarPermiso()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+            Eliminar
+        </button>
+        <button type="reset" id="resetButton" class="btn-warning" (click)="limpiarFormulario()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 2v6h6M2.66 15.57a10 10 0 1 0 .57-8.38"/></svg>
+            Limpiar
+        </button>
     </div>
-  
-    <!-- Permissions Table -->
-    <div class="table-container">
-      <div class="card">
-        <div class="card-body p-0">
-          <div class="table-responsive">
-            <table class="table table-hover mb-0">
-              <thead class="purple-header text-white">
-                <tr>
-                  <th scope="col">Id</th>
-                  <th scope="col">Nombre</th>
-                  <th scope="col">Rol</th>
-                  <th scope="col">Puerta</th>
-                  <th scope="col">Día</th>
-                  <th scope="col">Hora</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let perm of filteredPermissions">
-                  <td>{{ perm.id }}</td>
-                  <td>{{ perm.usuarioId }}</td>
-                  <td>{{ perm.puesto }}</td>
-                  <td>{{ perm.puertasId }}</td>
-                  <td>{{ perm.dias }}</td>
-                  <td>{{ perm.horas }}</td>
-                </tr>
-              </tbody>
-            </table>
-              <p *ngIf="filterPermissions.length === 0" class="text-center p-3">No hay permisos disponibles</p>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
-  
+</body>

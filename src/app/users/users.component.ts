@@ -1,98 +1,123 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HeaderComponent } from '../header/header.component';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { UsuarioserviceService } from '../services/usuarioservice.service';
+import { HeaderComponent } from "../header/header.component";
 
 @Component({
   selector: 'app-users',
-  imports: [HeaderComponent],
+  standalone: true,
+  imports: [CommonModule, HeaderComponent, ReactiveFormsModule],  // Aquí estamos importando CommonModule
   templateUrl: './users.component.html',
-  styleUrl: './users.component.css'
+  styleUrls: ['./users.component.css']
 })
-export class UsersComponent {
-  userForm: FormGroup;
+export class UsersComponent implements OnInit {
 
-  constructor(private fb: FormBuilder) {
+  userForm: FormGroup;
+  usuarios: any[] = [];
+  editando = false;
+  loading = false;
+
+  constructor(
+    private fb: FormBuilder,
+    private usuarioService: UsuarioserviceService
+  ) {
     this.userForm = this.fb.group({
-      nombreCompleto: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(2),
-          Validators.maxLength(100),
-          Validators.pattern(/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/) // Solo letras y espacios
-        ]
-      ],
-      correo: [
-        '',
-        [
-          Validators.required,
-          Validators.email,
-          Validators.maxLength(100)
-        ]
-      ],
-      telefono: [
-        '',
-        [
-          Validators.pattern(/^(\+?52|0052)?\s?(\d{10})$/) // Teléfono mexicano opcional
-        ]
-      ],
-      matricula: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(5),
-          Validators.maxLength(20),
-          Validators.pattern(/^[A-Z0-9-]+$/) // Letras mayúsculas, números y guiones
-        ]
-      ],
-      area: [
-        '',
-        [Validators.required]
-      ],
-      usuario: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(4),
-          Validators.maxLength(20),
-          Validators.pattern(/^[a-zA-Z0-9_]+$/) // Letras, números y guion bajo
-        ]
-      ],
-      password: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(8),
-          Validators.maxLength(30),
-          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/) // Contraseña segura
-        ]
-      ],
-      confirmPassword: [
-        '',
-        [Validators.required]
-      ],
-      tipoUsuario: [
-        '',
-        [Validators.required]
-      ]
-    }, {
-      validators: this.passwordMatchValidator // Validación de coincidencia de contraseñas
+      id: [''],
+      nombre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100), Validators.pattern(/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/)]],
+      correo: ['', [Validators.required, Validators.email]],
+      clave: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(30),
+        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])/)]],
+      confirmarClave: ['', Validators.required],
+      pin: ['', [Validators.required, Validators.min(1000), Validators.max(9999)]],
+      rol: ['', Validators.required]
+    }, { validators: this.matchPasswords });
+  }
+
+  ngOnInit(): void {
+    this.obtenerUsuarios();
+  }
+
+  matchPasswords(group: FormGroup) {
+    const clave = group.get('clave')?.value;
+    const confirmar = group.get('confirmarClave')?.value;
+    return clave === confirmar ? null : { mismatch: true };
+  }
+
+  obtenerUsuarios() {
+    this.loading = true;
+    this.usuarioService.getUsuarios().subscribe({
+      next: data => {
+        this.usuarios = data;
+        this.loading = false;
+      },
+      error: err => {
+        this.loading = false;
+        alert('Error al obtener usuarios: ' + err.message);
+      }
     });
   }
 
-  // Método para validar que las contraseñas coincidan
-  passwordMatchValidator(group: FormGroup) {
-    const password = group.get('password')?.value;
-    const confirmPassword = group.get('confirmPassword')?.value;
-    return password === confirmPassword ? null : { passwordsMismatch: true };
-  }
-
-  // Método para registrar usuario
-  registrarUsuario() {
-    if (this.userForm.invalid) {
-      console.log('Errores de validación:', this.userForm.errors);
+  editarUsuario(usuario: any) {
+    if (!usuario || !usuario.id) {
+      alert('Usuario no encontrado');
       return;
     }
-    console.log('Formulario válido, enviando datos:', this.userForm.value);
+    this.userForm.patchValue(usuario);
+    this.editando = true;
+  }
+
+  eliminarUsuario(id: number) {
+    if (confirm('¿Estás seguro de eliminar este usuario?')) {
+      this.usuarioService.eliminarUsuario(id).subscribe({
+        next: () => {
+          alert('Usuario eliminado');
+          this.obtenerUsuarios();
+        },
+        error: err => alert('Error al eliminar usuario: ' + err.message)
+      });
+    }
+  }
+
+  guardarUsuario() {
+    if (this.userForm.invalid) {
+      this.userForm.markAllAsTouched();
+      return;
+    }
+
+    const usuario = { ...this.userForm.value };
+    delete usuario.confirmarClave;
+
+    if (this.editando) {
+      this.usuarioService.actualizarUsuario(usuario).subscribe({
+        next: () => {
+          alert('Usuario actualizado correctamente');
+          this.limpiarFormulario();
+          this.obtenerUsuarios();
+        },
+        error: err => alert('Error al actualizar usuario: ' + err.message)
+      });
+    } else {
+      this.usuarioService.crearUsuario(usuario).subscribe({
+        next: () => {
+          alert('Usuario creado correctamente');
+          this.limpiarFormulario();
+          this.obtenerUsuarios();
+        },
+        error: err => alert('Error al crear usuario: ' + err.message)
+      });
+    }
+  }
+
+  limpiarFormulario() {
+    this.userForm.reset();
+    this.editando = false;
+    Object.keys(this.userForm.controls).forEach(key => {
+      this.userForm.get(key)?.markAsUntouched();
+    });
+  }
+
+  crearNuevo() {
+    this.limpiarFormulario();
   }
 }

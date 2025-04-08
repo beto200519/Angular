@@ -1,19 +1,20 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { Router } from '@angular/router';
+import { Router } from '@angular/router'; // Para navegación
+import { RouterModule } from '@angular/router'; // Para utilizar el router en un componente standalone
 
 @Component({
   selector: 'app-header',
-  imports: [CommonModule, RouterModule], // 👈 Agregar RouterModule
+  standalone: true, // Indicar que este es un componente standalone
+  imports: [RouterModule], // Asegúrate de que RouterModule esté importado aquí
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrls: ['./header.component.css']
 })
-
 export class HeaderComponent {
   constructor(private router: Router) {}
 
-  logout(){
-    this.router.navigate(['/login']);
+  logout() {
+    // Eliminar el token y navegar al login
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']); // Redirigir al login
   }
 }
